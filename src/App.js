@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {Route, Routes, Link} from 'react-router-dom';
+import Users from './components/Users';
+import Products from './components/Products';
+import ProductEdit from './components/ProductEdit';
+import UserDetail from './components/UserDetail';
+import ProductAdd from './components/ProductAdd';
+import {AppBar, Toolbar, Typography, Button, CssBaseline} from '@mui/material';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <>
+            <CssBaseline/>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" style={{flexGrow: 1}}>
+                        My React App
+                    </Typography>
+                    <Button color="inherit" component={Link} to="/users">
+                        Users
+                    </Button>
+                    <Button color="inherit" component={Link} to="/products">
+                        Products
+                    </Button>
+                </Toolbar>
+            </AppBar>
+            <div>
+                <Routes>
+                    <Route path="/users" element={<Users/>}/>
+                    <Route path="/user/:id" element={<UserDetail/>}/>
+                    <Route path="/products" element={<Products/>}/>
+                    <Route path="/products/new" element={<ProductAdd/>}/>
+                    <Route path="/products/edit/:id" element={<ProductEdit/>}/>
+                </Routes>
+            </div>
+        </>
+    );
 }
 
 export default App;
